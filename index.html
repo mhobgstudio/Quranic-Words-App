@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quran Word Memorization App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Quran Word Memorization</h1>
+      <div class="stats">
+        <span id="totalWords">Total Words: 0</span>
+        <span id="memorizedWords">Memorized: 0</span>
+        <span id="progress">Progress: 0%</span>
+        <span id="currentStage">Stage: 1</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="flashcard">
+        <div class="word-display">
+          <h2 id="arabicWord">Select a Word</h2>
+          <p id="transliteration"></p>
+        </div>
+        <div class="word-details">
+          <p id="translation"></p>
+          <p id="partOfSpeech"></p>
+          <p id="frequency"></p>
+          <p id="stageLevel"></p>
+        </div>
+        <div class="pronunciation">
+          <button id="undoAction">⎌ Undo</button>
+        </div>
+        <div class="memorization-controls">
+          <button id="knowWord">I Know This Word</button>
+          <button id="dontKnowWord">I Don't Know</button>
+        </div>
+      </div>
+    </main>
+
+    <section class="settings">
+      <h3>Settings</h3>
+      <div class="setting">
+        <label for="frequencyFilter">Minimum Frequency:</label>
+        <input type="range" id="frequencyFilter" min="0" max="5000" value="0">
+        <span id="frequencyValue">0</span>
+      </div>
+      <div class="setting">
+        <label for="repetitionMode">Repetition Mode</label>
+        <select id="repetitionMode">
+          <option value="random">Random</option>
+          <option value="weakest">Weakest Words First</option>
+        </select>
+      </div>
+      <div class="setting">
+        <label for="stageSelect">Stage Select</label>
+        <select id="stageSelect">
+          <!-- Stages will be dynamically populated -->
+        </select>
+      </div>
+    </section>
+
+    <section class="statistics">
+      <h3>Word Learning Statistics</h3>
+      <div id="learningChart"></div>
+      <div class="detail-stats">
+        <div>
+          <h4>Most Difficult Words</h4>
+          <ol id="difficultWordsList"></ol>
+        </div>
+        <div>
+          <h4>Recently Learned</h4>
+          <ol id="recentlyLearnedWords"></ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.flashcard {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.flashcard:hover {
+  transform: scale(1.02);
+}
+
+.word-display h2 {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.word-details {
+  margin: 20px 0;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.memorization-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.memorization-controls button {
+  flex: 1;
+  margin: 0 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#knowWord {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#dontKnowWord {
+  background-color: #f44336;
+  color: white;
+}
+
+.settings, .statistics {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.setting {
+  margin-bottom: 15px;
+}
+
+.settings .setting select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.pronunciation {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.pronunciation button {
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pronunciation button:hover {
+  background-color: #d0d0d0;
+}
+
+#stageLevel {
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+#currentStage {
+  font-weight: bold;
+  color: #28a745;
+  margin-left: 15px;
+}
+
+#undoAction {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+  
+  .flashcard {
+    padding: 10px;
+  }
+}
