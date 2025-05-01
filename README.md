@@ -1,9 +1,11 @@
 # Qur-an-Word4Word-
 Simple Site for memorizing all the words in the Qur'an
 
+View site at: 
+https://mhobgstudio.github.io/Quranic-Words-App/
+
 
 Still a working theory
-
 
 #CODE
 Contains: HTML, CSS, JS and and extra words.js containing all the words of the Qur'an along side their meanings
