@@ -3,86 +3,374 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quran Word Memorization App - Learn Quranic Vocabulary</title>
-  <meta name="description" content="AI-powered Quranic word memorization app with spaced repetition. Learn Arabic Quran vocabulary through smart flashcards.">
-  <meta property="og:title" content="Quran Word Memorization App">
-  <meta property="og:description" content="Master Quranic Arabic vocabulary with spaced repetition and smart flashcards.">
-  <meta property="og:type" content="website">
+  <title>Quranic Vocab — Master Quranic Arabic</title>
+  <meta name="description" content="Master 5,155 Quranic Arabic words with spaced repetition, transliterations, verse context, and audio pronunciation.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#070714">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root { --bg: #070714; --card: rgba(14,16,30,0.92); --border: rgba(100,120,255,0.12); --text: #d0d0ec; --text-dim: #8888b0; --gold: #d4a843; --blue: #5b7fff; --blue2: #4ecdc4; --radius: 16px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; margin: 0; line-height: 1.6; background-image: radial-gradient(ellipse at 30% 20%, rgba(91,127,255,0.05) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(78,205,196,0.04) 0%, transparent 50%); }
+    .app { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 30px 0 10px; }
+    header h1 { font-family: 'Amiri', serif; font-size: clamp(1.8rem,5vw,2.8rem); background: linear-gradient(135deg, var(--gold), var(--blue2), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4px; }
+    header .sub { color: var(--text-dim); font-size: .9rem; }
+    .stats-bar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0; }
+    .stat-chip { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 6px 16px; font-size: .8rem; color: var(--text-dim); backdrop-filter: blur(8px); }
+    .stat-chip strong { color: var(--gold); }
+
+    .flashcard { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px 32px; text-align: center; margin: 20px 0; backdrop-filter: blur(12px); transition: all .3s; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+    .flashcard::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--blue), var(--blue2), var(--gold)); opacity: .4; }
+    .flashcard .arabic { font-family: 'Amiri', serif; font-size: 3rem; color: var(--text); margin-bottom: 8px; direction: rtl; }
+    .flashcard .translit { color: var(--text-dim); font-size: .9rem; font-style: italic; margin-bottom: 16px; }
+    .flashcard .details { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
+    .flashcard .detail { background: rgba(91,127,255,0.08); border: 1px solid rgba(91,127,255,0.15); border-radius: 8px; padding: 6px 14px; font-size: .82rem; color: var(--text-dim); }
+    .flashcard .detail strong { color: var(--blue2); }
+    .flashcard .meanings { margin-top: 12px; font-size: .85rem; color: var(--gold); font-style: italic; }
+    .flashcard .verse-context { margin-top: 12px; padding: 12px; background: rgba(91,127,255,0.05); border: 1px solid rgba(91,127,255,0.1); border-radius: 10px; text-align: left; font-size: .82rem; color: var(--text-dim); max-height: 120px; overflow-y: auto; }
+    .flashcard .verse-context h4 { color: var(--blue2); font-size: .78rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .flashcard .stage-progress { margin-top: 16px; font-size: .85rem; color: var(--gold); }
+    .flashcard .actions { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .flashcard .actions button { padding: 12px 28px; border-radius: 30px; border: none; cursor: pointer; font-weight: 600; font-size: .9rem; font-family: inherit; transition: all .3s; }
+    .flashcard .actions .know { background: linear-gradient(135deg, #4caf50, #45a049); color: #fff; box-shadow: 0 4px 16px rgba(76,175,80,.3); }
+    .flashcard .actions .know:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(76,175,80,.4); }
+    .flashcard .actions .dont { background: linear-gradient(135deg, #f44336, #d32f2f); color: #fff; box-shadow: 0 4px 16px rgba(244,67,54,.3); }
+    .flashcard .actions .dont:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244,67,54,.4); }
+    .flashcard .actions .undo { background: var(--card); border: 1px solid var(--border); color: var(--text-dim); }
+    .flashcard .actions .undo:hover { border-color: var(--gold); }
+    .flashcard .actions .audio-btn { background: rgba(91,127,255,0.15); border: 1px solid rgba(91,127,255,0.2); color: var(--blue2); padding: 12px 20px; }
+    .flashcard .actions .audio-btn:hover { background: rgba(91,127,255,0.25); transform: translateY(-2px); }
+
+    .sidebar-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+    @media (max-width: 700px) { .sidebar-panels { grid-template-columns: 1fr; } }
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; backdrop-filter: blur(12px); }
+    .panel h3 { font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .panel h3 i { color: var(--blue2); }
+
+    .panel select, .panel input[type="range"] { width: 100%; margin-top: 6px; background: rgba(0,0,0,.3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--text); font-family: inherit; font-size: .85rem; appearance: auto; }
+    .panel input[type="range"] { padding: 0; accent-color: var(--blue); }
+    .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .setting-row label { font-size: .85rem; color: var(--text-dim); }
+    .setting-row .val { color: var(--blue2); font-weight: 600; font-size: .85rem; }
+
+    .word-list { max-height: 200px; overflow-y: auto; }
+    .word-list::-webkit-scrollbar { width: 4px; }
+    .word-list::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 4px; }
+    .word-item { padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: .85rem; color: var(--text-dim); display: flex; justify-content: space-between; cursor: pointer; }
+    .word-item:hover { background: rgba(91,127,255,0.05); }
+    .word-item .badge { font-size: .75rem; color: var(--gold); }
+
+    .progress-ring { display: flex; justify-content: center; gap: 24px; margin: 16px 0; flex-wrap: wrap; }
+    .ring-item { text-align: center; }
+    .ring-item canvas { width: 80px; height: 80px; }
+    .ring-item .label { font-size: .75rem; color: var(--text-dim); margin-top: 4px; }
+    .ring-item .pct { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+
+    .empty-state { text-align: center; padding: 40px; color: var(--text-dim); }
+    .empty-state i { font-size: 2.5rem; color: var(--blue); margin-bottom: 12px; }
+    .empty-state p { font-size: .9rem; }
+
+    .keyboard-hint { text-align: center; margin-top: 8px; font-size: .75rem; color: var(--text-dim); }
+    .keyboard-hint kbd { background: rgba(91,127,255,0.1); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; font-size: .7rem; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Quran Word Memorization</h1>
-      <div class="stats">
-        <span id="totalWords">Total Words: 0</span>
-        <span id="memorizedWords">Memorized: 0</span>
-        <span id="progress">Progress: 0%</span>
-        <span id="currentStage">Stage: 1</span>
-      </div>
-    </header>
+<div class="app">
+  <header>
+    <h1>📖 Quranic Vocab</h1>
+    <p class="sub">Master 5,155 Quranic Arabic words — transliterations, verse context, and audio</p>
+    <div class="stats-bar">
+      <span class="stat-chip">Total: <strong id="totalWords">0</strong></span>
+      <span class="stat-chip">Memorized: <strong id="memorizedWords">0</strong></span>
+      <span class="stat-chip">Progress: <strong id="progress">0%</strong></span>
+      <span class="stat-chip">Stage: <strong id="currentStage">1</strong></span>
+    </div>
+  </header>
 
-    <main>
-      <div class="flashcard">
-        <div class="word-display">
-          <h2 id="arabicWord">Select a Word</h2>
-          <p id="transliteration"></p>
-        </div>
-        <div class="word-details">
-          <p id="translation"></p>
-          <p id="partOfSpeech"></p>
-          <p id="frequency"></p>
-          <p id="stageLevel"></p>
-        </div>
-        <div class="pronunciation">
-          <button id="undoAction">⎌ Undo</button>
-        </div>
-        <div class="memorization-controls">
-          <button id="knowWord">I Know This Word</button>
-          <button id="dontKnowWord">I Don't Know</button>
-        </div>
-      </div>
-    </main>
-
-    <section class="settings">
-      <h3>Settings</h3>
-      <div class="setting">
-        <label for="frequencyFilter">Minimum Frequency:</label>
-        <input type="range" id="frequencyFilter" min="0" max="5000" value="0">
-        <span id="frequencyValue">0</span>
-      </div>
-      <div class="setting">
-        <label for="repetitionMode">Repetition Mode</label>
-        <select id="repetitionMode">
-          <option value="random">Random</option>
-          <option value="weakest">Weakest Words First</option>
-        </select>
-      </div>
-      <div class="setting">
-        <label for="stageSelect">Stage Select</label>
-        <select id="stageSelect">
-          <!-- Stages will be dynamically populated -->
-        </select>
-      </div>
-    </section>
-
-    <section class="statistics">
-      <h3>Word Learning Statistics</h3>
-      <div id="learningChart"></div>
-      <div class="detail-stats">
-        <div>
-          <h4>Most Difficult Words</h4>
-          <ol id="difficultWordsList"></ol>
-        </div>
-        <div>
-          <h4>Recently Learned</h4>
-          <ol id="recentlyLearnedWords"></ol>
-        </div>
-      </div>
-    </section>
+  <!-- Progress Rings -->
+  <div class="progress-ring">
+    <div class="ring-item"><canvas id="ringOverall" width="80" height="80"></canvas><div class="label">Overall</div></div>
+    <div class="ring-item"><canvas id="ringStage" width="80" height="80"></canvas><div class="label">Current Stage</div></div>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <!-- Flashcard -->
+  <div class="flashcard">
+    <div class="arabic" id="arabicWord">Select a Word</div>
+    <div class="translit" id="transliteration"></div>
+    <div class="details">
+      <span class="detail" id="translation"></span>
+      <span class="detail" id="partOfSpeech"></span>
+      <span class="detail" id="frequency"></span>
+    </div>
+    <div class="meanings" id="meanings"></div>
+    <div class="verse-context" id="verseContext" style="display:none">
+      <h4><i class="fas fa-book-open"></i> Found in Quran</h4>
+      <div id="verseList"></div>
+    </div>
+    <div class="stage-progress" id="stageLevel"></div>
+    <div class="actions">
+      <button class="audio-btn" id="audioBtn" title="Listen to pronunciation"><i class="fas fa-volume-up"></i> Listen</button>
+      <button class="undo" id="undoAction"><i class="fas fa-undo"></i> Undo</button>
+      <button class="know" id="knowWord"><i class="fas fa-check"></i> I Know This</button>
+      <button class="dont" id="dontKnowWord"><i class="fas fa-times"></i> Don't Know</button>
+    </div>
+    <div class="keyboard-hint"><kbd>Space</kbd> Flip · <kbd>←</kbd> Undo · <kbd>→</kbd> Know · <kbd>↓</kbd> Don't Know</div>
+  </div>
+
+  <div class="sidebar-panels">
+    <!-- Settings -->
+    <div class="panel">
+      <h3><i class="fas fa-sliders-h"></i> Settings</h3>
+      <div class="setting-row"><label for="frequencyFilter">Min Frequency</label><span class="val" id="frequencyValue">0</span></div>
+      <input type="range" id="frequencyFilter" min="0" max="5000" value="0">
+      <div class="setting-row"><label for="repetitionMode">Mode</label></div>
+      <select id="repetitionMode"><option value="random">Random</option><option value="weakest">Weakest First</option><option value="sequential">Sequential</option></select>
+      <div class="setting-row" style="margin-top:10px;"><label for="stageSelect">Stage</label></div>
+      <select id="stageSelect"></select>
+    </div>
+
+    <!-- Stats -->
+    <div class="panel">
+      <h3><i class="fas fa-chart-bar"></i> Learning Stats</h3>
+      <div class="setting-row"><label>Difficult Words</label></div>
+      <div class="word-list" id="difficultWordsList"><div class="empty-state"><p>No difficult words yet</p></div></div>
+      <div class="setting-row" style="margin-top:10px;"><label>Recently Learned</label></div>
+      <div class="word-list" id="recentlyLearnedWords"><div class="empty-state"><p>No words learned yet</p></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+</script>
+<script src="words.js"></script>
+<script>
+class App {
+  constructor() {
+    this.words = ARABIC_WORDS_DATA;
+    this.currentWord = null;
+    this.totalStages = Math.max(...this.words.map(w => w.stage));
+    this.lastAction = null;
+    this.sequentialIndex = 0;
+    // Load persisted state from localStorage
+    this.memorized = new Map(JSON.parse(localStorage.getItem('qvm-memorized') || '[]'));
+    this.difficult = new Map(JSON.parse(localStorage.getItem('qvm-difficult') || '[]'));
+    this.recentlyLearned = JSON.parse(localStorage.getItem('qvm-recent') || '[]');
+    this.init();
+  }
+
+  $(id) { return document.getElementById(id); }
+
+  init() {
+    this.initElements();
+    this.populateStages();
+    this.setupEvents();
+    this.setupKeyboard();
+    this.loadWord();
+    this.updateUI();
+  }
+
+  save() {
+    localStorage.setItem('qvm-memorized', JSON.stringify([...this.memorized]));
+    localStorage.setItem('qvm-difficult', JSON.stringify([...this.difficult]));
+    localStorage.setItem('qvm-recent', JSON.stringify(this.recentlyLearned));
+  }
+
+  initElements() {
+    this.el = {};
+    ['arabicWord','transliteration','translation','partOfSpeech','frequency','stageLevel',
+     'totalWords','memorizedWords','progress','currentStage',
+     'undoAction','knowWord','dontKnowWord','audioBtn',
+     'frequencyFilter','frequencyValue','repetitionMode','stageSelect',
+     'difficultWordsList','recentlyLearnedWords','meanings','verseContext','verseList'
+    ].forEach(id => this.el[id] = this.$(id));
+  }
+
+  populateStages() {
+    const s = this.el.stageSelect;
+    s.innerHTML = '<option value="all">All Stages</option>';
+    for (let i = 1; i <= this.totalStages; i++) {
+      s.innerHTML += `<option value="${i}">Stage ${i}</option>`;
+    }
+  }
+
+  setupEvents() {
+    this.el.undoAction.onclick = () => this.undo();
+    this.el.knowWord.onclick = () => this.mark(true);
+    this.el.dontKnowWord.onclick = () => this.mark(false);
+    this.el.audioBtn.onclick = () => this.speakWord();
+    this.el.frequencyFilter.oninput = () => {
+      this.el.frequencyValue.textContent = this.el.frequencyFilter.value;
+      this.loadWord();
+    };
+    this.el.repetitionMode.onchange = () => { this.sequentialIndex = 0; this.loadWord(); };
+    this.el.stageSelect.onchange = () => { this.sequentialIndex = 0; this.loadWord(); };
+  }
+
+  setupKeyboard() {
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      switch(e.key) {
+        case ' ': e.preventDefault(); this.mark(true); break;
+        case 'ArrowRight': e.preventDefault(); this.mark(true); break;
+        case 'ArrowLeft': e.preventDefault(); this.undo(); break;
+        case 'ArrowDown': e.preventDefault(); this.mark(false); break;
+        case 'a': this.speakWord(); break;
+      }
+    });
+  }
+
+  getWords() {
+    const stage = this.el.stageSelect.value;
+    const minFreq = parseInt(this.el.frequencyFilter.value);
+    let filtered = this.words;
+    if (stage !== 'all') filtered = filtered.filter(w => w.stage === parseInt(stage));
+    filtered = filtered.filter(w => w.frequency > minFreq);
+    return filtered;
+  }
+
+  loadWord() {
+    const words = this.getWords();
+    if (!words.length) { this.el.arabicWord.textContent = 'No words found'; return; }
+    const mode = this.el.repetitionMode.value;
+    if (mode === 'weakest') {
+      const weak = words.filter(w => !this.memorized.has(w) || this.memorized.get(w) < this.totalStages);
+      this.currentWord = weak.length ? weak[Math.floor(Math.random()*weak.length)] : words[Math.floor(Math.random()*words.length)];
+    } else if (mode === 'sequential') {
+      this.currentWord = words[this.sequentialIndex % words.length];
+      this.sequentialIndex++;
+    } else {
+      this.currentWord = words[Math.floor(Math.random()*words.length)];
+    }
+    this.display();
+  }
+
+  display() {
+    if (!this.currentWord) return;
+    this.el.arabicWord.textContent = this.currentWord.word;
+    this.el.transliteration.textContent = this.currentWord.transliteration || '';
+    this.el.translation.textContent = '📖 ' + this.currentWord.translation;
+    this.el.partOfSpeech.textContent = '📝 ' + this.currentWord.partOfSpeech;
+    this.el.frequency.textContent = '🔁 ' + this.currentWord.frequency + '× in Quran';
+    const stage = this.memorized.get(this.currentWord) || 1;
+    this.el.stageLevel.textContent = `Progress: ${stage}/${this.totalStages}`;
+
+    // MeaningsSoFar — cumulative meanings
+    if (this.currentWord.MeaningsSoFar) {
+      this.el.meanings.textContent = '💡 Also means: ' + this.currentWord.MeaningsSoFar;
+      this.el.meanings.style.display = '';
+    } else {
+      this.el.meanings.style.display = 'none';
+    }
+
+    // Verse context — show first few verses where this word appears
+    if (this.currentWord.versesFound) {
+      const verses = this.currentWord.versesFound.split(', ').slice(0, 12);
+      const more = this.currentWord.verseCount > 12 ? ` ... and ${this.currentWord.verseCount - 12} more` : '';
+      this.el.verseList.textContent = verses.join(', ') + more;
+      this.el.verseContext.style.display = '';
+    } else {
+      this.el.verseContext.style.display = 'none';
+    }
+
+    this.updateUI();
+  }
+
+  speakWord() {
+    if (!this.currentWord) return;
+    const text = this.currentWord.word;
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ar-SA';
+      u.rate = 0.75;
+      this.el.audioBtn.classList.add('playing');
+      u.onend = () => this.el.audioBtn.classList.remove('playing');
+      u.onerror = () => this.el.audioBtn.classList.remove('playing');
+      speechSynthesis.speak(u);
+    }
+  }
+
+  mark(known) {
+    this.lastAction = { type: known ? 'known' : 'difficult', word: this.currentWord, prevStage: this.memorized.get(this.currentWord) || 1 };
+    if (known) {
+      const next = Math.min((this.memorized.get(this.currentWord) || 1) + 1, this.totalStages);
+      this.memorized.set(this.currentWord, next);
+      this.recentlyLearned.unshift({...this.currentWord, stage: next});
+      this.recentlyLearned = this.recentlyLearned.slice(0,10);
+    } else {
+      const prev = Math.max(1, (this.memorized.get(this.currentWord) || 1) - 1);
+      this.memorized.set(this.currentWord, prev);
+      this.difficult.set(this.currentWord, (this.difficult.get(this.currentWord) || 0) + 1);
+    }
+    this.loadWord();
+    this.updateUI();
+    this.save();
+  }
+
+  undo() {
+    if (!this.lastAction) return;
+    this.memorized.set(this.lastAction.word, this.lastAction.prevStage);
+    if (this.lastAction.type === 'difficult') {
+      const c = this.difficult.get(this.lastAction.word) || 0;
+      if (c > 1) this.difficult.set(this.lastAction.word, c-1); else this.difficult.delete(this.lastAction.word);
+    } else if (this.recentlyLearned[0]?.word === this.lastAction.word.word) this.recentlyLearned.shift();
+    this.currentWord = this.lastAction.word;
+    this.lastAction = null;
+    this.display();
+    this.save();
+  }
+
+  updateUI() {
+    const stage = this.el.stageSelect.value;
+    const stageWords = stage === 'all' ? this.words : this.words.filter(w => w.stage === parseInt(stage));
+    const totalMem = stageWords.filter(w => this.memorized.get(w) === this.totalStages).length;
+    this.el.totalWords.textContent = stage === 'all' ? this.words.length : stageWords.length;
+    this.el.memorizedWords.textContent = totalMem;
+    const pct = stageWords.length ? Math.round(totalMem/stageWords.length*100) : 0;
+    this.el.progress.textContent = pct + '%';
+    this.el.currentStage.textContent = stage === 'all' ? 'All' : stage;
+
+    // Draw rings
+    const allPct = this.words.length ? Math.round(this.words.filter(w=>this.memorized.get(w)===this.totalStages).length/this.words.length*100) : 0;
+    this.drawRing('ringOverall', allPct, '#5b7fff', '#4ecdc4');
+    this.drawRing('ringStage', pct, '#d4a843', '#4ecdc4');
+
+    // Difficult words
+    const diffWords = [...this.difficult.entries()].sort((a,b)=>b[1]-a[1]).slice(0,8);
+    this.el.difficultWordsList.innerHTML = diffWords.length ? diffWords.map(([w,c]) => `<div class="word-item" onclick="app.loadSpecificWord('${w.word.replace(/'/g,"\\'")}')"><span>${w.word} <span style="color:var(--text-dim);font-size:.75rem">${w.translation}</span></span><span class="badge">${c}x</span></div>`).join('') : '<div class="empty-state"><p>No difficult words yet</p></div>';
+
+    // Recently learned
+    this.el.recentlyLearnedWords.innerHTML = this.recentlyLearned.length ? this.recentlyLearned.map(w => `<div class="word-item" onclick="app.loadSpecificWord('${w.word.replace(/'/g,"\\'")}')"><span>${w.word} <span style="color:var(--text-dim);font-size:.75rem">${w.translation}</span></span><span class="badge">Stage ${this.memorized.get(w)||1}</span></div>`).join('') : '<div class="empty-state"><p>No words learned yet</p></div>';
+  }
+
+  loadSpecificWord(arabic) {
+    const found = this.words.find(w => w.word === arabic);
+    if (found) { this.currentWord = found; this.display(); }
+  }
+
+  drawRing(id, pct, c1, c2) {
+    const canvas = this.$(id);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height, cx = w/2, cy = h/2, r = 30, lineW = 6;
+    ctx.clearRect(0,0,w,h);
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = lineW; ctx.stroke();
+    const start = -Math.PI/2, end = start + (pct/100)*Math.PI*2;
+    const grad = ctx.createLinearGradient(0,0,w,h); grad.addColorStop(0,c1); grad.addColorStop(1,c2);
+    ctx.beginPath(); ctx.arc(cx,cy,r,start,end); ctx.strokeStyle = grad; ctx.lineWidth = lineW; ctx.lineCap = 'round'; ctx.stroke();
+    ctx.fillStyle = '#d0d0ec'; ctx.font = 'bold 12px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(pct+'%',cx,cy);
+  }
+}
+
+const app = new App();
+</script>
 </body>
 </html>

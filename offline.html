@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're Offline</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕌</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #070714; --card: rgba(14,16,30,0.92); --border: rgba(100,120,255,0.12); --text: #d0d0ec; --text-dim: #8888b0; --gold: #d4a843; --blue: #5b7fff; --blue2: #4ecdc4; }
+    [data-theme="light"] { --bg: #f5f2fa; --card: #fff; --border: rgba(0,0,0,0.06); --text: #1a1a2e; --text-dim: #5a5a7a; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; background-image: radial-gradient(ellipse at 30% 20%, rgba(91,127,255,0.05) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(78,205,196,0.04) 0%, transparent 50%); }
+    .container { max-width: 560px; width: 100%; text-align: center; }
+    .mosque { font-size: 4rem; margin-bottom: 12px; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    h1 { font-size: clamp(1.4rem,4vw,2rem); background: linear-gradient(135deg, var(--gold), var(--blue2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; }
+    .subtitle { color: var(--text-dim); font-size: .95rem; margin-bottom: 20px; line-height: 1.5; }
+
+    /* Connection indicator */
+    .conn-bar { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px; padding: 8px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: .8rem; color: var(--text-dim); }
+    .conn-dots { display: flex; gap: 3px; }
+    .conn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background .3s; }
+    .conn-dot.on { background: #f44336; }
+    .conn-dot.off { background: #4caf50; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+    /* Carousel */
+    .carousel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px; min-height: 160px; display: flex; flex-direction: column; justify-content: center; transition: opacity .5s; }
+    .carousel .arabic { font-size: 1.5rem; color: var(--gold); direction: rtl; line-height: 1.8; margin-bottom: 8px; font-family: Georgia, serif; }
+    .carousel .translation { font-style: italic; color: var(--text-dim); font-size: .88rem; line-height: 1.5; margin-bottom: 6px; }
+    .carousel .source { font-size: .75rem; color: var(--blue2); }
+    .carousel .dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+    .carousel .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); transition: all .3s; cursor: pointer; }
+    .carousel .dot.active { background: var(--gold); width: 18px; border-radius: 3px; }
+
+    /* Retry */
+    .retry-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #fff; border: none; border-radius: 30px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .3s; box-shadow: 0 4px 20px rgba(91,127,255,.3); margin-bottom: 24px; }
+    .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(91,127,255,.4); }
+    .retry-btn.loading { opacity: .7; pointer-events: none; }
+    .retry-btn .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+    .retry-btn.loading .spinner { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Apps grid */
+    .apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 24px; }
+    .app { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 10px; text-decoration: none; color: var(--text); transition: all .3s; }
+    .app:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 8px 25px rgba(0,0,0,.2); }
+    .app .icon { font-size: 1.6rem; margin-bottom: 4px; }
+    .app .name { font-size: .78rem; font-weight: 600; }
+    .app .desc { font-size: .68rem; color: var(--text-dim); margin-top: 2px; }
+
+    /* Theme toggle */
+    .theme-toggle { position: fixed; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--card); color: var(--gold); cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; z-index: 10; }
+    .theme-toggle:hover { transform: scale(1.1); }
+
+    footer { font-size: .75rem; color: var(--text-dim); margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+  <div class="container">
+    <div class="mosque">🕌</div>
+    <h1>You're Offline</h1>
+    <p class="subtitle">No internet connection. Cached content is still available.</p>
+
+    <div class="conn-bar">
+      <div class="conn-dots">
+        <div class="conn-dot off" id="dot1"></div>
+        <div class="conn-dot" id="dot2"></div>
+        <div class="conn-dot" id="dot3"></div>
+        <div class="conn-dot" id="dot4"></div>
+        <div class="conn-dot" id="dot5"></div>
+      </div>
+      <span id="connStatus">Checking connection...</span>
+    </div>
+
+    <div class="carousel" id="carousel">
+      <div class="arabic" id="cArabic"></div>
+      <div class="translation" id="cTrans"></div>
+      <div class="source" id="cSource"></div>
+      <div class="dots" id="cDots"></div>
+    </div>
+
+    <button class="retry-btn" id="retryBtn" onclick="retryConnection()">
+      <span class="spinner"></span>
+      <span id="retryText">🔄 Try Again</span>
+    </button>
+
+    <div class="apps">
+      <a href="/" class="app"><div class="icon">🏠</div><div class="name">Home</div></a>
+      <a href="/index.html" class="app"><div class="icon">📖</div><div class="name">Current App</div></a>
+      <a href="/pages/quran-reader.html" class="app"><div class="icon">📗</div><div class="name">Quran</div></a>
+      <a href="/pages/vocabulary.html" class="app"><div class="icon">🗂️</div><div class="name">Vocab</div></a>
+      <a href="/pages/tajweed.html" class="app"><div class="icon">🎵</div><div class="name">Tajweed</div></a>
+      <a href="/pages/hifz.html" class="app"><div class="icon">🧠</div><div class="name">Hifz</div></a>
+    </div>
+
+    <footer>
+      <p>Islamic Apps Suite — Offline-first study companions</p>
+      <p style="margin-top:4px">رَبِّ زِدْنِي عِلْمًا — "My Lord, increase me in knowledge" (20:114)</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme
+    const saved = localStorage.getItem('offline-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    const tbtn = document.getElementById('themeToggle');
+    tbtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    tbtn.onclick = () => {
+      const n = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', n);
+      localStorage.setItem('offline-theme', n);
+      tbtn.textContent = n === 'dark' ? '☀️' : '🌙';
+    };
+
+    // Quran verse carousel
+    const verses = [
+      { ar: "وَقُل رَّبِّ زِدْنِي عِلْمًا", trans: "\"My Lord, increase me in knowledge.\"", src: "Quran 20:114" },
+      { ar: "إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ", trans: "\"Indeed, Allah will not change the condition of a people until they change what is in themselves.\"", src: "Quran 13:11" },
+      { ar: "فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ", trans: "\"So which of the favors of your Lord would you deny?\"", src: "Quran 55:13" },
+      { ar: "وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", trans: "\"And whoever relies upon Allah — then He is sufficient for him.\"", src: "Quran 65:3" },
+      { ar: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", trans: "\"Our Lord, give us good in this world and good in the Hereafter, and protect us from the Fire.\"", src: "Quran 2:201" },
+      { ar: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", trans: "\"Indeed, with hardship comes ease.\"", src: "Quran 94:6" },
+      { ar: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", trans: "\"Allah does not burden a soul beyond that it can bear.\"", src: "Quran 2:286" },
+      { ar: "وَإِلَٰهُكُمْ إِلَٰهٌ وَاحِدٌ ۖ لَّا إِلَٰهَ إِلَّا هُوَ الرَّحْمَٰنُ الرَّحِيمُ", trans: "\"And your God is one God. There is no deity except Him, the Entirely Merciful, the Especially Merciful.\"", src: "Quran 2:163" },
+      { ar: "فَذَكِّرْ إِنَّمَا أَنتَ مُذَكِّرٌ", trans: "\"So remind, [O Muhammad]; you are only a reminder.\"", src: "Quran 88:21" },
+      { ar: "وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ", trans: "\"And your Lord is going to give you, and you will be satisfied.\"", src: "Quran 93:5" },
+      { ar: "اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ", trans: "\"Allah is the Light of the heavens and the earth.\"", src: "Quran 24:35" },
+      { ar: "وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ", trans: "\"And He is with you wherever you are.\"", src: "Quran 57:4" },
+    ];
+    let current = 0;
+    const cAr = document.getElementById('cArabic');
+    const cTr = document.getElementById('cTrans');
+    const cSr = document.getElementById('cSource');
+    const cDt = document.getElementById('cDots');
+
+    function renderVerse(i) {
+      cAr.textContent = verses[i].ar;
+      cTr.textContent = verses[i].trans;
+      cSr.textContent = '— ' + verses[i].src;
+      cDt.innerHTML = verses.map((_,j) => `<div class="dot ${j===i?'active':''}" onclick="goVerse(${j})"></div>`).join('');
+    }
+    function goVerse(i) { current = i; renderVerse(i); }
+    renderVerse(0);
+    setInterval(() => { current = (current + 1) % verses.length; renderVerse(current); }, 8000);
+
+    // Connection indicator
+    function updateConn() {
+      const dots = [document.getElementById('dot1'),document.getElementById('dot2'),document.getElementById('dot3'),document.getElementById('dot4'),document.getElementById('dot5')];
+      const status = document.getElementById('connStatus');
+      if (navigator.onLine) {
+        dots.forEach(d => { d.className = 'conn-dot on'; });
+        status.textContent = 'Online — reconnecting...';
+      } else {
+        dots.forEach((d,i) => { d.className = i === 0 ? 'conn-dot off' : 'conn-dot'; });
+        status.textContent = 'Offline — no signal detected';
+      }
+    }
+    updateConn();
+    setInterval(updateConn, 3000);
+
+    // Retry
+    function retryConnection() {
+      const btn = document.getElementById('retryBtn');
+      const txt = document.getElementById('retryText');
+      btn.classList.add('loading');
+      txt.textContent = 'Testing...';
+      fetch('/manifest.json', { cache: 'no-store' })
+        .then(r => { if (r.ok) window.location.reload(); else throw 0; })
+        .catch(() => { btn.classList.remove('loading'); txt.textContent = '❌ Still offline'; setTimeout(() => { txt.textContent = '🔄 Try Again'; }, 2000); });
+    }
+    window.addEventListener('online', () => window.location.reload());
+    if (navigator.onLine) window.location.reload();
+  </script>
+</body>
+</html>

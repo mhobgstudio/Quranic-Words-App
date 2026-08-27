@@ -1,0 +1,10 @@
+{
+  "name": "Quranic Vocab — Master Quranic Arabic",
+  "short_name": "Quranic Vocab",
+  "description": "Master 5,155 Quranic Arabic words with spaced repetition and transliterations",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#070714",
+  "theme_color": "#d4a843",
+  "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>", "sizes": "any", "type": "image/svg+xml"}]
+}
