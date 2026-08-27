@@ -1,0 +1,602 @@
+{
+  "1": {
+    "word": "مِن",
+    "transliteration": "min",
+    "translation": "from",
+    "stage": 1,
+    "ar": "ar/00001.wav",
+    "en": "en/00001.wav"
+  },
+  "2": {
+    "word": "ٱللَّه",
+    "transliteration": "Allāh",
+    "translation": "God",
+    "stage": 1,
+    "ar": "ar/00002.wav",
+    "en": "en/00002.wav"
+  },
+  "3": {
+    "word": "فِى",
+    "transliteration": "fī",
+    "translation": "in",
+    "stage": 1,
+    "ar": "ar/00003.wav",
+    "en": "en/00003.wav"
+  },
+  "4": {
+    "word": "إِنّ",
+    "transliteration": "inna",
+    "translation": "that",
+    "stage": 1,
+    "ar": "ar/00004.wav",
+    "en": "en/00004.wav"
+  },
+  "5": {
+    "word": "قَالَ",
+    "transliteration": "qāla",
+    "translation": "He said",
+    "stage": 1,
+    "ar": "ar/00005.wav",
+    "en": "en/00005.wav"
+  },
+  "6": {
+    "word": "عَلَىٰ",
+    "transliteration": "ʿalā",
+    "translation": "on",
+    "stage": 1,
+    "ar": "ar/00006.wav",
+    "en": "en/00006.wav"
+  },
+  "7": {
+    "word": "ٱلَّذِى",
+    "transliteration": "alladhī",
+    "translation": "Who",
+    "stage": 1,
+    "ar": "ar/00007.wav",
+    "en": "en/00007.wav"
+  },
+  "8": {
+    "word": "لَا",
+    "transliteration": "lā",
+    "translation": "no",
+    "stage": 1,
+    "ar": "ar/00008.wav",
+    "en": "en/00008.wav"
+  },
+  "9": {
+    "word": "كَانَ",
+    "transliteration": "kāna",
+    "translation": "He was",
+    "stage": 1,
+    "ar": "ar/00009.wav",
+    "en": "en/00009.wav"
+  },
+  "10": {
+    "word": "مَا",
+    "transliteration": "mā",
+    "translation": "what",
+    "stage": 1,
+    "ar": "ar/00010.wav",
+    "en": "en/00010.wav"
+  },
+  "11": {
+    "word": "رَبّ",
+    "transliteration": "rabb",
+    "translation": "lord",
+    "stage": 1,
+    "ar": "ar/00011.wav",
+    "en": "en/00011.wav"
+  },
+  "12": {
+    "word": "إِلَىٰ",
+    "transliteration": "ilā",
+    "translation": "to",
+    "stage": 1,
+    "ar": "ar/00012.wav",
+    "en": "en/00012.wav"
+  },
+  "13": {
+    "word": "مَا",
+    "transliteration": "mā",
+    "translation": "what",
+    "stage": 1,
+    "ar": "ar/00013.wav",
+    "en": "en/00013.wav"
+  },
+  "14": {
+    "word": "مَن",
+    "transliteration": "man",
+    "translation": "from",
+    "stage": 1,
+    "ar": "ar/00014.wav",
+    "en": "en/00014.wav"
+  },
+  "15": {
+    "word": "إِن",
+    "transliteration": "in",
+    "translation": "that",
+    "stage": 1,
+    "ar": "ar/00015.wav",
+    "en": "en/00015.wav"
+  },
+  "16": {
+    "word": "أَن",
+    "transliteration": "anna",
+    "translation": "that",
+    "stage": 1,
+    "ar": "ar/00016.wav",
+    "en": "en/00016.wav"
+  },
+  "17": {
+    "word": "إِلَّا",
+    "transliteration": "illā",
+    "translation": "unless",
+    "stage": 1,
+    "ar": "ar/00017.wav",
+    "en": "en/00017.wav"
+  },
+  "18": {
+    "word": "ءَامَنَ",
+    "transliteration": "āmana",
+    "translation": "Believed",
+    "stage": 1,
+    "ar": "ar/00018.wav",
+    "en": "en/00018.wav"
+  },
+  "19": {
+    "word": "ذَٰلِك",
+    "transliteration": "dhālika",
+    "translation": "that",
+    "stage": 1,
+    "ar": "ar/00019.wav",
+    "en": "en/00019.wav"
+  },
+  "20": {
+    "word": "عَن",
+    "transliteration": "ʿan",
+    "translation": "on",
+    "stage": 1,
+    "ar": "ar/00020.wav",
+    "en": "en/00020.wav"
+  },
+  "21": {
+    "word": "أَرْض",
+    "transliteration": "arḍ",
+    "translation": "land",
+    "stage": 1,
+    "ar": "ar/00021.wav",
+    "en": "en/00021.wav"
+  },
+  "22": {
+    "word": "قَد",
+    "transliteration": "qad",
+    "translation": "may / yet",
+    "stage": 1,
+    "ar": "ar/00022.wav",
+    "en": "en/00022.wav"
+  },
+  "23": {
+    "word": "إِذَا",
+    "transliteration": "idhā",
+    "translation": "if",
+    "stage": 1,
+    "ar": "ar/00023.wav",
+    "en": "en/00023.wav"
+  },
+  "24": {
+    "word": "قَوْم",
+    "transliteration": "qawm",
+    "translation": "people",
+    "stage": 1,
+    "ar": "ar/00024.wav",
+    "en": "en/00024.wav"
+  },
+  "25": {
+    "word": "ءَايَة",
+    "transliteration": "āyah",
+    "translation": "A verse",
+    "stage": 1,
+    "ar": "ar/00025.wav",
+    "en": "en/00025.wav"
+  },
+  "26": {
+    "word": "عَلِمَ",
+    "transliteration": "ʿalima",
+    "translation": "science",
+    "stage": 1,
+    "ar": "ar/00026.wav",
+    "en": "en/00026.wav"
+  },
+  "27": {
+    "word": "أَنّ",
+    "transliteration": "anna",
+    "translation": "that",
+    "stage": 1,
+    "ar": "ar/00027.wav",
+    "en": "en/00027.wav"
+  },
+  "28": {
+    "word": "كُلّ",
+    "transliteration": "kull",
+    "translation": "all",
+    "stage": 1,
+    "ar": "ar/00028.wav",
+    "en": "en/00028.wav"
+  },
+  "29": {
+    "word": "لَم",
+    "transliteration": "lam",
+    "translation": "did not",
+    "stage": 1,
+    "ar": "ar/00029.wav",
+    "en": "en/00029.wav"
+  },
+  "30": {
+    "word": "جَعَلَ",
+    "transliteration": "jaʿala",
+    "translation": "make",
+    "stage": 1,
+    "ar": "ar/00030.wav",
+    "en": "en/00030.wav"
+  },
+  "31": {
+    "word": "ثُمّ",
+    "transliteration": "thumma",
+    "translation": "then",
+    "stage": 1,
+    "ar": "ar/00031.wav",
+    "en": "en/00031.wav"
+  },
+  "32": {
+    "word": "رَسُول",
+    "transliteration": "rasūl",
+    "translation": "messenger",
+    "stage": 1,
+    "ar": "ar/00032.wav",
+    "en": "en/00032.wav"
+  },
+  "33": {
+    "word": "لَا",
+    "transliteration": "lā",
+    "translation": "no",
+    "stage": 1,
+    "ar": "ar/00033.wav",
+    "en": "en/00033.wav"
+  },
+  "34": {
+    "word": "يَوْم",
+    "transliteration": "yawm",
+    "translation": "day",
+    "stage": 1,
+    "ar": "ar/00034.wav",
+    "en": "en/00034.wav"
+  },
+  "35": {
+    "word": "عَذَاب",
+    "transliteration": "ʿadhāb",
+    "translation": "torment",
+    "stage": 1,
+    "ar": "ar/00035.wav",
+    "en": "en/00035.wav"
+  },
+  "36": {
+    "word": "هَٰذَا",
+    "transliteration": "hādhā",
+    "translation": "this",
+    "stage": 1,
+    "ar": "ar/00036.wav",
+    "en": "en/00036.wav"
+  },
+  "37": {
+    "word": "سَمَآء",
+    "transliteration": "samāʾ",
+    "translation": "sky",
+    "stage": 1,
+    "ar": "ar/00037.wav",
+    "en": "en/00037.wav"
+  },
+  "38": {
+    "word": "نَفْس",
+    "transliteration": "nafs",
+    "translation": "same",
+    "stage": 1,
+    "ar": "ar/00038.wav",
+    "en": "en/00038.wav"
+  },
+  "39": {
+    "word": "كَفَرَ",
+    "transliteration": "kafara",
+    "translation": "He disbelieved",
+    "stage": 1,
+    "ar": "ar/00039.wav",
+    "en": "en/00039.wav"
+  },
+  "40": {
+    "word": "شَىْء",
+    "transliteration": "shayʾ",
+    "translation": "something",
+    "stage": 1,
+    "ar": "ar/00040.wav",
+    "en": "en/00040.wav"
+  },
+  "41": {
+    "word": "أَو",
+    "transliteration": "aw",
+    "translation": "or",
+    "stage": 1,
+    "ar": "ar/00041.wav",
+    "en": "en/00041.wav"
+  },
+  "42": {
+    "word": "جَآءَ",
+    "transliteration": "jāʾa",
+    "translation": "came",
+    "stage": 1,
+    "ar": "ar/00042.wav",
+    "en": "en/00042.wav"
+  },
+  "43": {
+    "word": "عَمِلَ",
+    "transliteration": "ʿamila",
+    "translation": "a job",
+    "stage": 1,
+    "ar": "ar/00043.wav",
+    "en": "en/00043.wav"
+  },
+  "44": {
+    "word": "آتَى",
+    "transliteration": "ātā",
+    "translation": "came",
+    "stage": 1,
+    "ar": "ar/00044.wav",
+    "en": "en/00044.wav"
+  },
+  "45": {
+    "word": "رَءَا",
+    "transliteration": "raʾā",
+    "translation": "saw",
+    "stage": 1,
+    "ar": "ar/00045.wav",
+    "en": "en/00045.wav"
+  },
+  "46": {
+    "word": "أَتَى",
+    "transliteration": "atā",
+    "translation": "came / To arrive",
+    "stage": 1,
+    "ar": "ar/00046.wav",
+    "en": "en/00046.wav"
+  },
+  "47": {
+    "word": "كِتَٰب",
+    "transliteration": "kitāb",
+    "translation": "books",
+    "stage": 1,
+    "ar": "ar/00047.wav",
+    "en": "en/00047.wav"
+  },
+  "48": {
+    "word": "بَيْن",
+    "transliteration": "bayna",
+    "translation": "between",
+    "stage": 1,
+    "ar": "ar/00048.wav",
+    "en": "en/00048.wav"
+  },
+  "49": {
+    "word": "حَقّ",
+    "transliteration": "ḥaqq",
+    "translation": "right",
+    "stage": 1,
+    "ar": "ar/00049.wav",
+    "en": "en/00049.wav"
+  },
+  "50": {
+    "word": "نَّاس",
+    "transliteration": "nās",
+    "translation": "people",
+    "stage": 1,
+    "ar": "ar/00050.wav",
+    "en": "en/00050.wav"
+  },
+  "51": {
+    "word": "إِذ",
+    "transliteration": "idh",
+    "translation": " as\\\\\\\\\\\\\\\\nsince\\\\\\\\\\\\\\\\nbecause\\\\\\\\\\\\\\\\nso",
+    "stage": 1,
+    "ar": "ar/00051.wav",
+    "en": "en/00051.wav"
+  },
+  "52": {
+    "word": "شَآءَ",
+    "transliteration": "shāʾa",
+    "translation": "He wanted",
+    "stage": 1,
+    "ar": "ar/00052.wav",
+    "en": "en/00052.wav"
+  },
+  "53": {
+    "word": "أُولَٰٓئِك",
+    "transliteration": "ulāʾika",
+    "translation": "Those",
+    "stage": 1,
+    "ar": "ar/00053.wav",
+    "en": "en/00053.wav"
+  },
+  "54": {
+    "word": "قَبْل",
+    "transliteration": "qabl",
+    "translation": "before",
+    "stage": 1,
+    "ar": "ar/00054.wav",
+    "en": "en/00054.wav"
+  },
+  "55": {
+    "word": "مُؤْمِن",
+    "transliteration": "muʾmin",
+    "translation": "Believer",
+    "stage": 1,
+    "ar": "ar/00055.wav",
+    "en": "en/00055.wav"
+  },
+  "56": {
+    "word": "لَو",
+    "transliteration": "law",
+    "translation": "if",
+    "stage": 1,
+    "ar": "ar/00056.wav",
+    "en": "en/00056.wav"
+  },
+  "57": {
+    "word": "مَن",
+    "transliteration": "man",
+    "translation": "from",
+    "stage": 1,
+    "ar": "ar/00057.wav",
+    "en": "en/00057.wav"
+  },
+  "58": {
+    "word": "خَلَقَ",
+    "transliteration": "khalaqa",
+    "translation": "create",
+    "stage": 1,
+    "ar": "ar/00058.wav",
+    "en": "en/00058.wav"
+  },
+  "59": {
+    "word": "أَنزَلَ",
+    "transliteration": "anzala",
+    "translation": "He sent down",
+    "stage": 1,
+    "ar": "ar/00059.wav",
+    "en": "en/00059.wav"
+  },
+  "60": {
+    "word": "سَبِيل",
+    "transliteration": "sabīl",
+    "translation": "way",
+    "stage": 1,
+    "ar": "ar/00060.wav",
+    "en": "en/00060.wav"
+  },
+  "61": {
+    "word": "كَذَّبَ",
+    "transliteration": "kadhdhaba",
+    "translation": "to lie",
+    "stage": 1,
+    "ar": "ar/00061.wav",
+    "en": "en/00061.wav"
+  },
+  "62": {
+    "word": "دَعَا",
+    "transliteration": "daʿā",
+    "translation": "He called",
+    "stage": 1,
+    "ar": "ar/00062.wav",
+    "en": "en/00062.wav"
+  },
+  "63": {
+    "word": "أَمْر",
+    "transliteration": "amr",
+    "translation": "commander",
+    "stage": 1,
+    "ar": "ar/00063.wav",
+    "en": "en/00063.wav"
+  },
+  "64": {
+    "word": "ٱتَّقَىٰ",
+    "transliteration": "ittaqā",
+    "translation": "Be pious",
+    "stage": 1,
+    "ar": "ar/00064.wav",
+    "en": "en/00064.wav"
+  },
+  "65": {
+    "word": "عِند",
+    "transliteration": "ʿinda",
+    "translation": "when",
+    "stage": 1,
+    "ar": "ar/00065.wav",
+    "en": "en/00065.wav"
+  },
+  "66": {
+    "word": "مَع",
+    "transliteration": "maʿa",
+    "translation": "with",
+    "stage": 1,
+    "ar": "ar/00066.wav",
+    "en": "en/00066.wav"
+  },
+  "67": {
+    "word": "بَعْض",
+    "transliteration": "baʿḍ",
+    "translation": "some",
+    "stage": 1,
+    "ar": "ar/00067.wav",
+    "en": "en/00067.wav"
+  },
+  "68": {
+    "word": "لَمَّا",
+    "transliteration": "lammā",
+    "translation": "when",
+    "stage": 1,
+    "ar": "ar/00068.wav",
+    "en": "en/00068.wav"
+  },
+  "69": {
+    "word": "أَيُّهَا",
+    "transliteration": "ayyuhā",
+    "translation": "Hey",
+    "stage": 1,
+    "ar": "ar/00069.wav",
+    "en": "en/00069.wav"
+  },
+  "70": {
+    "word": "خَيْر",
+    "transliteration": "khayr",
+    "translation": "goodness",
+    "stage": 1,
+    "ar": "ar/00070.wav",
+    "en": "en/00070.wav"
+  },
+  "71": {
+    "word": "إِلَٰه",
+    "transliteration": "ilāh",
+    "translation": "Deity",
+    "stage": 1,
+    "ar": "ar/00071.wav",
+    "en": "en/00071.wav"
+  },
+  "72": {
+    "word": "نَار",
+    "transliteration": "nār",
+    "translation": "fire",
+    "stage": 1,
+    "ar": "ar/00072.wav",
+    "en": "en/00072.wav"
+  },
+  "73": {
+    "word": "غَيْر",
+    "transliteration": "ghayr",
+    "translation": "not",
+    "stage": 1,
+    "ar": "ar/00073.wav",
+    "en": "en/00073.wav"
+  },
+  "74": {
+    "word": "هَدَى",
+    "transliteration": "hadā",
+    "translation": "to guide",
+    "stage": 1,
+    "ar": "ar/00074.wav",
+    "en": "en/00074.wav"
+  },
+  "75": {
+    "word": "أَرَادَ",
+    "transliteration": "arāda",
+    "translation": "He wanted",
+    "stage": 1,
+    "ar": "ar/00075.wav",
+    "en": "en/00075.wav"
+  }
+}
