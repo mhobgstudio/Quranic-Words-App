@@ -60,15 +60,9 @@ async def synth_one(text: str, voice: str, out_path: str, lang: str) -> bool:
     """Generate TTS audio for one text."""
     try:
         import edge_tts
-        ssml = (
-            f'<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis"'
-            f' xml:lang="{lang}">'
-            f'<voice name="{voice}">'
-            f'<prosody rate="0%" pitch="0%" volume="0%">'
-            f'{text}'
-            f'</prosody></voice></speak>'
-        )
-        c = edge_tts.Communicate(ssml, voice)
+        if not text or not text.strip():
+            return False
+        c = edge_tts.Communicate(text.strip(), voice)
         await c.save(out_path)
         p = Path(out_path)
         return p.exists() and p.stat().st_size > 500
