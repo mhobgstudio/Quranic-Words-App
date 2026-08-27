@@ -163,6 +163,8 @@ class App {
     this.memorized = new Map(JSON.parse(localStorage.getItem('qvm-memorized') || '[]'));
     this.difficult = new Map(JSON.parse(localStorage.getItem('qvm-difficult') || '[]'));
     this.recentlyLearned = JSON.parse(localStorage.getItem('qvm-recent') || '[]');
+    this.audioManifest = null;
+    fetch('audio/manifest.json').then(r => r.json()).then(m => { this.audioManifest = m; }).catch(() => {});
     this.init();
   }
 
@@ -285,12 +287,28 @@ class App {
 
   speakWord() {
     if (!this.currentWord) return;
-    const text = this.currentWord.word;
+    // Try pre-generated audio first, fall back to SpeechSynthesis
+    const idx = this.words.indexOf(this.currentWord) + 1;
+    if (idx > 0 && this.audioManifest && this.audioManifest[idx]) {
+      const audioPath = 'audio/' + this.audioManifest[idx].ar;
+      const audio = new Audio(audioPath);
+      this.el.audioBtn.classList.add('playing');
+      audio.onended = () => this.el.audioBtn.classList.remove('playing');
+      audio.onerror = () => {
+        this.el.audioBtn.classList.remove('playing');
+        this._speakFallback(this.currentWord.word);
+      };
+      audio.play().catch(() => this._speakFallback(this.currentWord.word));
+    } else {
+      this._speakFallback(this.currentWord.word);
+    }
+  }
+
+  _speakFallback(text) {
     if ('speechSynthesis' in window) {
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'ar-SA';
-      u.rate = 0.75;
+      u.lang = 'ar-SA'; u.rate = 0.75;
       this.el.audioBtn.classList.add('playing');
       u.onend = () => this.el.audioBtn.classList.remove('playing');
       u.onerror = () => this.el.audioBtn.classList.remove('playing');
