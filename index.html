@@ -28,6 +28,7 @@
     .flashcard .translit { color: var(--text-dim); font-size: .9rem; font-style: italic; margin-bottom: 16px; }
     .flashcard .details { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
     .flashcard .detail { background: rgba(91,127,255,0.08); border: 1px solid rgba(91,127,255,0.15); border-radius: 8px; padding: 6px 14px; font-size: .82rem; color: var(--text-dim); }
+    #translation { font-size: 1.05rem !important; font-weight: 600; color: var(--text) !important; background: rgba(91,127,255,0.12) !important; border-color: rgba(91,127,255,0.25) !important; padding: 8px 18px !important; }
     .flashcard .detail strong { color: var(--blue2); }
     .flashcard .meanings { margin-top: 12px; font-size: .85rem; color: var(--gold); font-style: italic; }
     .flashcard .verse-context { margin-top: 12px; padding: 12px; background: rgba(91,127,255,0.05); border: 1px solid rgba(91,127,255,0.1); border-radius: 10px; text-align: left; font-size: .82rem; color: var(--text-dim); max-height: 120px; overflow-y: auto; }
@@ -258,7 +259,7 @@ class App {
     if (!this.currentWord) return;
     this.el.arabicWord.textContent = this.currentWord.word;
     this.el.transliteration.textContent = this.currentWord.transliteration || '';
-    this.el.translation.textContent = '📖 ' + this.currentWord.translation;
+    this.el.translation.innerHTML = '<strong>📖 Translation:</strong> ' + this.currentWord.translation;
     this.el.partOfSpeech.textContent = '📝 ' + this.currentWord.partOfSpeech;
     this.el.frequency.textContent = '🔁 ' + this.currentWord.frequency + '× in Quran';
     const stage = this.memorized.get(this.currentWord) || 1;
