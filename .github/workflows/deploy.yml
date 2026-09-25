@@ -1,0 +1,56 @@
+name: Validate & Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: test -f index.html && echo "✅ index.html" || exit 1
+
+      - name: Validate service worker
+        run: node --check sw.js && echo "✅ sw.js valid" || exit 1
+
+      - name: Validate manifest
+        run: node -e "JSON.parse(require('fs').readFileSync('manifest.json','utf8'))" && echo "✅ manifest.json" || exit 1
+
+      - name: Validate words.js
+        run: node -e "eval(require('fs').readFileSync('words.js','utf8'))" && echo "✅ words.js valid" || exit 1
+
+      - name: Check audio files exist
+        run: |
+          AR_COUNT=$(ls audio/ar/*.wav 2>/dev/null | wc -l)
+          echo "Audio files: $AR_COUNT"
+          test "$AR_COUNT" -gt 0 && echo "✅ Audio files present" || echo "⚠️ No audio files yet"
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
